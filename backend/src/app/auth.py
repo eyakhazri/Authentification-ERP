@@ -49,7 +49,7 @@ async def login(credentials: AdminLogin):
     email = normalize_email(credentials.email)
     debug_log("Login attempt", email)
 
-    admin = await db.admins.find_one({"email": email})
+    admin = await db.admin.find_one({"email": email})
     debug_log("Admin found", admin)
 
     if not admin:
@@ -102,7 +102,7 @@ async def forgot_password(
     db = get_db()
     email = normalize_email(request.email)
 
-    admin = await db.admins.find_one({
+    admin = await db.admin.find_one({
         "email": email,
         "role": "admin",
     })
@@ -193,7 +193,7 @@ async def reset_password(request: PasswordResetConfirm):
 
     new_password_hash = get_password_hash(request.new_password)
 
-    result = await db.admins.update_one(
+    result = await db.admin.update_one(
         {"email": email},
         {
             "$set": {

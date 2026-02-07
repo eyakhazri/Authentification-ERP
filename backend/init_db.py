@@ -122,7 +122,7 @@ async def init_database():
     await create_all_indexes(db)
    
     print("Clearing existing data...")
-    await db.authentification.delete_many({})
+    await db.users.delete_many({})
     await db.categories.delete_many({})
     await db.clients.delete_many({})
     await db.prospects.delete_many({})
@@ -135,7 +135,7 @@ async def init_database():
     await db.rapports.delete_many({})
    
     print("Inserting users...")
-    result = await db.authentification.insert_many(USERS)
+    result = await db.users.insert_many(USERS)
     user_ids = [str(id) for id in result.inserted_ids]
    
     print("Inserting categories...")

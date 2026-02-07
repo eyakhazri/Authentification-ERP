@@ -64,7 +64,7 @@ async def login(credentials: AdminLogin):
             detail="Account is deactivated"
         )
 
-    if admin.get("role") != "admin":
+    if admin.get("role") != "ADMIN":
         raise HTTPException(
             status_code=403,
             detail="Insufficient privileges"
@@ -104,7 +104,7 @@ async def forgot_password(
 
     admin = await db.admin.find_one({
         "email": email,
-        "role": "admin",
+        "role": "ADMIN",
     })
     debug_log("Forgot-password admin search", admin)
 
@@ -240,7 +240,7 @@ async def get_current_admin(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    if payload.get("role") != "admin":
+    if payload.get("role") != "ADMIN":
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Admin access required",

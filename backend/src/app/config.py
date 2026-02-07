@@ -4,7 +4,7 @@ from functools import lru_cache
 class Settings(BaseSettings):
     # MongoDB
     MONGODB_URL: str = "mongodb://localhost:27017"
-    DATABASE_NAME: str = "users"
+    DATABASE_NAME: str = "authentification"
     
     # JWT
     SECRET_KEY: str = "4a8c9e7b2f3c1d6a8f4d5e6f7a8b9c0d1e2f5b4c9d7e2f1a3b6c8d9e0f1a2b3c"
